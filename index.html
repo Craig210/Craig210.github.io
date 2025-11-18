@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gorillaz - Official Website</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial Black', Arial, sans-serif;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 3px solid #00ff88;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 0 20px;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+        }
+
+        nav a.active {
+            color: #00ff88;
+        }
+
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.8);
+        }
+
+        .hero-text {
+            position: absolute;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .hero-text h1 {
+            font-size: 80px;
+            color: #00ff88;
+            text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section h2 {
+            font-size: 48px;
+            color: #00ff88;
+            margin-bottom: 40px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .albums {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .album-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .album-card:hover {
+            transform: translateY(-10px);
+            border-color: #00ff88;
+        }
+
+        .album-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .album-info {
+            padding: 20px;
+        }
+
+        .album-info h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #00ff88;
+        }
+
+        .band-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .member-card {
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .member-card:hover {
+            transform: scale(1.05);
+            border-color: #00ff88;
+        }
+
+        .member-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: 20px;
+        }
+
+        .member-info h3 {
+            font-size: 22px;
+            color: #00ff88;
+            margin-bottom: 10px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .about-grid img {
+            width: 100%;
+            border-radius: 10px;
+            border: 3px solid #00ff88;
+        }
+
+        .about-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: #ccc;
+        }
+
+        footer {
+            background: #1a1a1a;
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 3px solid #00ff88;
+        }
+
+        .logo-section {
+            text-align: center;
+            padding: 60px 20px;
+            background: #0a0a0a;
+        }
+
+        .logo-section img {
+            max-width: 300px;
+            filter: drop-shadow(0 0 30px #00ff88);
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .home-content {
+            text-align: center;
+            padding: 80px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .home-content h2 {
+            font-size: 48px;
+            color: #00ff88;
+            margin-bottom: 30px;
+        }
+
+        .home-content p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 48px;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                flex-wrap: wrap;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#" onclick="showPage('home')" class="nav-link active">Home</a>
+            <a href="#" onclick="showPage('albums')" class="nav-link">Albums</a>
+            <a href="#" onclick="showPage('band')" class="nav-link">The Band</a>
+            <a href="#" onclick="showPage('about')" class="nav-link">About</a>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <section class="hero">
+            <img src="images/image12.jpg" alt="Plastic Beach">
+            <div class="hero-text">
+                <h1>GORILLAZ</h1>
+            </div>
+        </section>
+
+        <div class="logo-section">
+            <img src="images/image11.jpg" alt="Gorillaz Logo">
+        </div>
+
+        <div class="home-content">
+            <h2>Welcome to the Virtual Band</h2>
+            <p>Experience the revolutionary fusion of music, art, and animation that changed the music industry forever.</p>
+            <p>Explore our discography, meet the band members, and dive into the Gorillaz universe.</p>
+        </div>
+    </div>
+
+    <!-- ALBUMS PAGE -->
+    <div id="albums" class="page">
+        <section class="section">
+            <h2>Albums</h2>
+            <div class="albums">
+                <div class="album-card">
+                    <img src="images/image1.jpg" alt="Gorillaz Self Titled">
+                    <div class="album-info">
+                        <a href="https://open.spotify.com/album/4tUxQkrduOE8sfgwJ5BI2F"><h3>Gorillaz</h3></a>
+                        <p>The debut album featuring "Clint Eastwood" and "19-2000"</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <img src="images/image3.jpg" alt="Demon Days">
+                    <div class="album-info">
+                        <a href="https://open.spotify.com/album/0bUTHlWbkSQysoM3VsWldT"><h3>Demon Days</h3></a>
+                        <p>Critically acclaimed album with "Feel Good Inc." and "Dare"</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <img src="images/image9.jpg" alt="Plastic Beach">
+                    <div class="album-info">
+                        <a href="https://open.spotify.com/album/2dIGnmEIy1WZIcZCFSj6i8"><h3>Plastic Beach</h3></a>
+                        <p>Concept album exploring environmental themes</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <img src="images/image4.jpg" alt="Humanz">
+                    <div class="album-info">
+                        <a href="https://open.spotify.com/album/0NvirtaDCaZU5PAW1O5FDE"><h3>Humanz</h3></a>
+                        <p>Star-studded collaboration album</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <img src="images/image5.jpg" alt="The Now Now">
+                    <div class="album-info">
+                        <a href="https://open.spotify.com/album/1amYhlukNF8WdaQC3gKkgL"><h3>The Now Now</h3></a>
+                        <p>Summer vibes and introspective tracks</p>
+                    </div>
+                </div>
+                <div class="album-card">
+                    <img src="images/image10.jpg" alt="Song Machine">
+                    <div class="album-info">
+                        <a href="https://open.spotify.com/album/5I9K0u8r52jp4Y2bF8mOaz"><h3>Song Machine Season One</h3></a>
+                        <p>Episodic album series with diverse collaborations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- <!-- BAND PAGE -->
+    <div id="band" class="page">
+        <section class="section">
+            <h2>The Band</h2>
+            <div class="band-members">
+                <div class="member-card" onclick="showPage('2d')">
+                    <img src="images/image2.jpg" alt="2D">
+                    <div class="member-info">
+                        <h3>2-D</h3>
+                        <p>Lead Vocals & Keyboards</p>
+                    </div>
+                </div>
+                <div class="member-card" onclick="showPage('murdoc')">
+                    <img src="images/image6.jpg" alt="Murdoc">
+                    <div class="member-info">
+                        <h3>Murdoc Niccals</h3>
+                        <p>Bass Guitar</p>
+                    </div>
+                </div>
+                <div class="member-card" onclick="showPage('noodle')">
+                    <img src="images/image7.jpg" alt="Noodle">
+                    <div class="member-info">
+                        <h3>Noodle</h3>
+                        <p>Guitar & Vocals</p>
+                    </div>
+                </div>
+                <div class="member-card" onclick="showPage('russel')">
+                    <img src="images/image8.jpg" alt="Russel">
+                    <div class="member-info">
+                        <h3>Russel Hobbs</h3>
+                        <p>Drums & Percussion</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 2-D PAGE -->
+    <div id="2d" class="page">
+        <section class="section">
+            <button onclick="showPage('band')" style="background: #00ff88; color: #000; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">← Back to Band</button>
+            <h2>2-D</h2>
+            <div class="about-grid">
+                <img src="images/image2.jpg" alt="2D">
+                <div class="about-text">
+                    <p><strong>Role:</strong> Lead Vocals & Keyboards</p>
+                    <p><strong>Born:</strong> May 23, 1978</p>
+                    <p><strong>Background:</strong> 2-D is the lead singer and keyboardist of Gorillaz. He got his stage name from the two dents in his head (which resulted in "Two Dents" or "2-D"). His trademark look includes spiky azure blue hair and completely black eyes with no visible pupils.</p>
+                    <p>Despite his vacant expression and somewhat dim personality, 2-D has a beautiful singing voice that has become the signature sound of Gorillaz. He's kind-hearted but easily influenced, especially by Murdoc.</p>
+                    <p><strong>Personality:</strong> Spacey, good-natured, and a bit naive. He loves horror films, particularly zombie movies.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- MURDOC PAGE -->
+    <div id="murdoc" class="page">
+        <section class="section">
+            <button onclick="showPage('band')" style="background: #00ff88; color: #000; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">← Back to Band</button>
+            <h2>Murdoc Niccals</h2>
+            <div class="about-grid">
+                <img src="images/image6.jpg" alt="Murdoc">
+                <div class="about-text">
+                    <p><strong>Role:</strong> Bass Guitar & Band Leader</p>
+                    <p><strong>Born:</strong> June 6, 1966</p>
+                    <p><strong>Background:</strong> Murdoc is the self-proclaimed leader and bassist of Gorillaz. He founded the band and recruited the other members. Known for his green skin, pointy teeth, and devilish appearance, Murdoc has a dark and mysterious past.</p>
+                    <p>He's responsible for the car accident that gave 2-D his distinctive look. Murdoc is arrogant, manipulative, and has a talent for getting into trouble with the law. Despite his rough exterior, he's a talented musician and the driving force behind Gorillaz.</p>
+                    <p><strong>Personality:</strong> Cunning, rebellious, and self-centered. He's obsessed with the occult and frequently claims to have made a deal with the devil.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- NOODLE PAGE -->
+    <div id="noodle" class="page">
+        <section class="section">
+            <button onclick="showPage('band')" style="background: #00ff88; color: #000; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">← Back to Band</button>
+            <h2>Noodle</h2>
+            <div class="about-grid">
+                <img src="images/image7.jpg" alt="Noodle">
+                <div class="about-text">
+                    <p><strong>Role:</strong> Guitar & Backing Vocals</p>
+                    <p><strong>Born:</strong> October 31, 1990</p>
+                    <p><strong>Background:</strong> Noodle is the enigmatic lead guitarist of Gorillaz. She arrived at Kong Studios in a FedEx crate from Japan when she was just 10 years old, speaking only Japanese and the word "Noodle."</p>
+                    <p>Despite her young age when she joined, Noodle was already an incredibly talented guitarist. She's the most mature and level-headed member of the group, often acting as the voice of reason. Her past is shrouded in mystery, with hints of military training and government experiments.</p>
+                    <p><strong>Personality:</strong> Intelligent, mysterious, and fiercely independent. She's a skilled martial artist and speaks multiple languages. Over the years, she's evolved from a cute kid guitarist into a confident, badass musician.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- RUSSEL PAGE -->
+    <div id="russel" class="page">
+        <section class="section">
+            <button onclick="showPage('band')" style="background: #00ff88; color: #000; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; border-radius: 5px; margin-bottom: 20px;">← Back to Band</button>
+            <h2>Russel Hobbs</h2>
+            <div class="about-grid">
+                <img src="images/image8.jpg" alt="Russel">
+                <div class="about-text">
+                    <p><strong>Role:</strong> Drums & Percussion</p>
+                    <p><strong>Born:</strong> June 3, 1975</p>
+                    <p><strong>Background:</strong> Russel is the drummer and percussionist of Gorillaz. He grew up in Brooklyn, New York, and was a talented musician from a young age. His life changed forever when he witnessed a drive-by shooting that killed his friends.</p>
+                    <p>The spirits of his deceased friends, including rapper Del tha Funkee Homosapien, are said to possess Russel, giving him access to their musical knowledge and talents. His eyes glow white when he's possessed, adding to his mystical persona.</p>
+                    <p><strong>Personality:</strong> Soulful, spiritual, and deeply connected to hip-hop culture. He's the gentle giant of the group, thoughtful and philosophical. Russel has struggled with weight fluctuations and has even been portrayed as a literal giant in some storylines.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="section">
+            <h2>About Gorillaz</h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>Gorillaz is a virtual band created by musician Damon Albarn and artist Jamie Hewlett. Combining music, art, and storytelling, Gorillaz has become one of the most innovative and successful musical projects of the 21st century.</p>
+                    <p>The band consists of four animated members: 2-D, Murdoc Niccals, Noodle, and Russel Hobbs. Each character has their own personality and backstory, creating a rich fictional universe.</p>
+                    <p>With multiple platinum albums, Grammy nominations, and groundbreaking music videos, Gorillaz continues to push the boundaries of what a band can be.</p>
+                </div>
+                <img src="images/image11.jpg" alt="Gorillaz Band">
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Gorillaz. All Rights Reserved.</p>
+        <p>Virtual Band | Real Music</p>
+    </footer>
+
+    <script>
+        function showPage(pageName) {
+            // Hide all pages
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // Remove active class from all nav links
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageName).classList.add('active');
+            
+            // Add active class to clicked nav link
+            event.target.classList.add('active');
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+    </script>
+</body>
+</html>
